@@ -108,33 +108,10 @@ $("#btnSubmit").on("click", function(event) {
         $("#trainInfo > tbody").append("<tr><td>" + childSnapshot.val().trainName + 
         "</td><td>" + childSnapshot.val().destination + "</td><td>" + childSnapshot.val().frequency + 
         "</td><td>" + moment(nextTrain).format("HH:mm") + "</td><td>" + tMinutesTillTrain + "</td></tr>");
-
-    //     // then i think i should put my .text stuff here using the snapshot.val().varname
-    //     // output all the information into the appropriate html spots
-    //     // Obtain a reference to the tbody element in the DOM
-    //     // var tbodyTar = $("tbody");
-    //     // // Create and save a reference to new empty table row
-    //     // var newTr = $("<tr>");
-    //     // // Create and save references to 5 td elements containing the train name, destination, frequency, next arrival, and minutes away
-    //     // var tdTrainName = $("<td>").text(snapshot.val().trainName);
-    //     // var tdDestination = $("<td>").text(snapshot.val().destination);
-    //     // var tdFrequency = $("<td>").text(snapshot.val().frequency);
-    //     // var tdNextArrival = $("<td>").text(snapshot.val().frequency);
-    //     // var tdMinutesAway = $("<td>").text(snapshot.val().frequency);
-    //     // // Append the td elements to the new table row
-    //     // newTr.append(tdTrainName, tdDestination, tdFrequency, tdNextArrival, tdMinutesAway);
-    //     // // Append the table row to the tbody element
-    //     // tbodyTar.append(newTr);
-
-    //     // for some reason, it's adding the train multiple times - halp!
-
-    //     // then i need to figure out how to make it store additional trains instead of just the most recent on firebase
-
-    //     // then the moment.js to get the times, then i'm done!
-    });
+    
 
       // Handle the errors
-    // }, function(errorObject) {
-    // console.log("Errors handled: " + errorObject.code);
-
+    }, function(errorObject) {
+    console.log("Errors handled: " + errorObject.code);
+});
 

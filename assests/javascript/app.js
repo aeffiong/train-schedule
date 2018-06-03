@@ -32,19 +32,23 @@ $("#btnSubmit").on("click", function(event) {
     var destination = $("#destination").val().trim();
     var firstTrainTime = moment($("#firstTrainTime").val().trim(), "HH:mm").format("HH:mm");
     var frequency = $("#frequency").val().trim();
-    // moment.js related variables
-    // nextArrival = ;
-    // minutesAway = ;
+   
 
     
     
     // confirm things are working
     console.log(moment().format("DD/MM/YY hh:mm A"));
     console.log(moment().endOf('hour').fromNow());
-    // console.log(trainName);
-    // console.log(destination);
+    console.log(trainName);
+    console.log(destination);
     console.log(firstTrainTime);
-    // console.log(frequency);
+    console.log(frequency);
+
+    // clear input fields after submit
+    $("#trainName").val("");
+    $("#destination").val("");
+    $("#firstTrainTime").val("");
+    $("#frequency").val("");
 
 
 

@@ -1,0 +1,27 @@
+.jumbotron {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: white;
+    font-weight: 500px;
+    background-color: teal;
+}
+
+#small {
+    font-size: 30px;
+    color: black;
+}
+
+.card-header {
+    font-size: 25px;
+    color: white;
+    background-color: teal;
+}
+
+body {
+    background-image: url("../images/tracks.jpg");
+   
+}
+
+#btnSubmit {
+    color: white;
+    background-color: teal;
+}

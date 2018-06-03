@@ -82,7 +82,7 @@ $("#btnSubmit").on("click", function(event) {
 
         // Current Time
         var currentTime = moment();
-        console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+        console.log("CURRENT TIME: " + moment(currentTime).format("HH:mm"));
 
         // // Difference between the times
         var diffTime = moment().diff(moment(childSnapshot.val().firstTrainTime, "HH:mm"));
@@ -98,16 +98,16 @@ $("#btnSubmit").on("click", function(event) {
 
         // // Next Train
         var nextTrain = moment().add(tMinutesTillTrain, "minutes");
-        console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+        console.log("ARRIVAL TIME: " + moment(nextTrain).format("HH:mm"));
 
         // var nextArrival = current time - first train time
         // var minutesAway = 
 
 
     //     // do this instead of the what we did below to get it to show on the screen
-    //     // $("#employeeRow > tbody").append("<tr><td>" + childSnapshot.val().employeeName + 
-    //     // "</td><td>" + childSnapshot.val().role + "</td><td>" + childSnapshot.val().startTime + 
-    //     // "</td><td>" + childSnapshot.val().monthlyRate + "</td></tr>");
+        $("#trainInfo > tbody").append("<tr><td>" + childSnapshot.val().trainName + 
+        "</td><td>" + childSnapshot.val().destination + "</td><td>" + childSnapshot.val().frequency + 
+        "</td><td>" + moment(nextTrain).format("HH:mm") + "</td><td>" + tMinutesTillTrain + "</td></tr>");
 
     //     // then i think i should put my .text stuff here using the snapshot.val().varname
     //     // output all the information into the appropriate html spots

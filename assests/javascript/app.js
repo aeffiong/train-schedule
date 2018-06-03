@@ -23,22 +23,15 @@
 
 // define variables
 var database = firebase.database();
-var trainName = "";
-var destination = "";
-var firstTrainTime = "";
-var frequency = 0;
-// moment.js related variables
-    // var nextArrival = ;
-    // var minutesAway = ;
 
 // on click for submit button and what will happens when they click it
 $("#btnSubmit").on("click", function(event) {
     event.preventDefault();
     // capture user inputs and store them in variables
-    trainName = $("#trainName").val().trim();
-    destination = $("#destination").val().trim();
-    firstTrainTime = moment($("#firstTrainTime").val().trim(), "HH:mm").format("HH:mm");
-    frequency = $("#frequency").val().trim();
+    var trainName = $("#trainName").val().trim();
+    var destination = $("#destination").val().trim();
+    var firstTrainTime = moment($("#firstTrainTime").val().trim(), "HH:mm").format("HH:mm");
+    var frequency = $("#frequency").val().trim();
     // moment.js related variables
     // nextArrival = ;
     // minutesAway = ;
@@ -67,36 +60,42 @@ $("#btnSubmit").on("click", function(event) {
     });
     // // listening for changes to the data in firebase
     //     // try "child_added" - goes off each time a new child is added to the server
-    database.ref().on("child_added", function(childSnapshot) {
+    database.ref().on("child_added", function(childSnapshot, prevChildKey) {
     
+
+        // create variables to store data
+        var trainNameInfo = childSnapshot.val().trainName;
+        var destinationInfo = childSnapshot.val().destination;
+        var firstTrainTimeInfo = childSnapshot.val().firstTrainTime;
+        var frequencyInfo = childSnapshot.val().frequency;
     //     // log the values
-        console.log(childSnapshot.val().trainName);
-        console.log(childSnapshot.val().destination);
-        console.log(childSnapshot.val().firstTrainTime);
-        console.log(childSnapshot.val().frequency);
+        console.log(trainNameInfo);
+        console.log(destinationInfo);
+        console.log(firstTrainTimeInfo);
+        console.log(frequencyInfo);
     
     // momentjs variables for next arrival and minutes away
         // First Time (pushed back 1 year to make sure it comes before current time)
-        // var firstTimeConverted = moment(firstTrainTime, "HH:mm").subtract(1, "years");
-        // console.log(firstTimeConverted);
+        var firstTimeConverted = moment(firstTrainTimeInfo, "HH:mm").subtract(1, "years");
+        console.log(firstTimeConverted);
 
-        // Current Time
+        // // Current Time
         var currentTime = moment();
         console.log("CURRENT TIME: " + moment(currentTime).format("HH:mm"));
 
-        // // Difference between the times
-        var diffTime = moment().diff(moment(childSnapshot.val().firstTrainTime, "HH:mm"));
+        // // // Difference between the times
+        var diffTime = moment().diff(moment(firstTimeConverted, "HH:mm"));
         console.log("DIFFERENCE IN TIME: " + diffTime);
 
-        // // Time apart (remainder)
-        var tRemainder = diffTime % frequency;
+        // // // Time apart (remainder)
+        var tRemainder = diffTime % frequencyInfo;
         console.log("Time apart: " + tRemainder);
 
-        // // Minute Until Train
-        var tMinutesTillTrain = frequency - tRemainder;
+        // // // Minute Until Train
+        var tMinutesTillTrain = frequencyInfo - tRemainder;
         console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
 
-        // // Next Train
+        // // // Next Train
         var nextTrain = moment().add(tMinutesTillTrain, "minutes");
         console.log("ARRIVAL TIME: " + moment(nextTrain).format("HH:mm"));
 
@@ -104,10 +103,12 @@ $("#btnSubmit").on("click", function(event) {
         // var minutesAway = 
 
 
-    //     // do this instead of the what we did below to get it to show on the screen
-        $("#trainInfo > tbody").append("<tr><td>" + childSnapshot.val().trainName + 
-        "</td><td>" + childSnapshot.val().destination + "</td><td>" + childSnapshot.val().frequency + 
+    //     //adding the user input and time calculations to the screen and the current time to the jumbotron
+        $("#trainInfo > tbody").append("<tr><td>" + trainNameInfo + 
+        "</td><td>" + destinationInfo + "</td><td>" + frequencyInfo + 
         "</td><td>" + moment(nextTrain).format("HH:mm") + "</td><td>" + tMinutesTillTrain + "</td></tr>");
+
+        $("#time").text("Current Time: " + moment().format("HH:mm"));
     
 
       // Handle the errors

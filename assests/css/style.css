@@ -10,6 +10,11 @@
     color: black;
 }
 
+#time {
+    font-size: 25px;
+    color: black;
+}
+
 .card-header {
     font-size: 25px;
     color: white;

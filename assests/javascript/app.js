@@ -26,7 +26,7 @@ var database = firebase.database();
 var trainName = "";
 var destination = "";
 var firstTrainTime = "";
-var frequency =0;
+var frequency = 0;
 // moment.js related variables
     // var nextArrival = ;
     // var minutesAway = ;
@@ -38,7 +38,7 @@ $("#btnSubmit").on("click", function(event) {
     trainName = $("#trainName").val().trim();
     destination = $("#destination").val().trim();
     firstTrainTime = moment($("#firstTrainTime").val().trim(), "HH:mm").format("HH:mm");
-    frequency = parseInt($("#frequency").val().trim());
+    frequency = $("#frequency").val().trim();
     // moment.js related variables
     // nextArrival = ;
     // minutesAway = ;

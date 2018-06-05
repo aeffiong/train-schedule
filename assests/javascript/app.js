@@ -53,7 +53,6 @@ $("#btnSubmit").on("click", function(event) {
 
 
     // setting up the firebase database
-        // try .push instead of .set to keep track of everything that's been added
     database.ref().push({
         trainName: trainName,
         destination: destination,
@@ -62,8 +61,8 @@ $("#btnSubmit").on("click", function(event) {
         dateAdded: firebase.database.ServerValue.TIMESTAMP
       });
     });
+
     // // listening for changes to the data in firebase
-    //     // try "child_added" - goes off each time a new child is added to the server
     database.ref().on("child_added", function(childSnapshot, prevChildKey) {
     
 
@@ -72,7 +71,8 @@ $("#btnSubmit").on("click", function(event) {
         var destinationInfo = childSnapshot.val().destination;
         var firstTrainTimeInfo = childSnapshot.val().firstTrainTime;
         var frequencyInfo = childSnapshot.val().frequency;
-    //     // log the values
+
+        // log the values
         console.log(trainNameInfo);
         console.log(destinationInfo);
         console.log(firstTrainTimeInfo);
@@ -103,11 +103,8 @@ $("#btnSubmit").on("click", function(event) {
         var nextTrain = moment().add(tMinutesTillTrain, "minutes");
         console.log("ARRIVAL TIME: " + moment(nextTrain).format("HH:mm"));
 
-        // var nextArrival = current time - first train time
-        // var minutesAway = 
 
-
-    //     //adding the user input and time calculations to the screen and the current time to the jumbotron
+        //adding the user input and time calculations to the screen and the current time to the jumbotron
         $("#trainInfo > tbody").append("<tr><td>" + trainNameInfo + 
         "</td><td>" + destinationInfo + "</td><td>" + frequencyInfo + 
         "</td><td>" + moment(nextTrain).format("HH:mm") + "</td><td>" + tMinutesTillTrain + "</td></tr>");
